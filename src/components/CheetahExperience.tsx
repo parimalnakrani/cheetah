@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -9,6 +9,18 @@ const TOTAL_FRAMES = 121;
 export const CheetahExperience: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const fgCanvasRef = useRef<HTMLCanvasElement>(null);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+
+  useEffect(() => {
+    if (loadingProgress < 100) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [loadingProgress]);
 
   useEffect(() => {
     if (!fgCanvasRef.current || !containerRef.current) return;
@@ -64,6 +76,7 @@ export const CheetahExperience: React.FC = () => {
 
       img.onload = () => {
         loadedCount++;
+        setLoadingProgress(Math.round((loadedCount / TOTAL_FRAMES) * 100));
         if (loadedCount === 1) {
           // Initial render
           render();
@@ -108,23 +121,52 @@ export const CheetahExperience: React.FC = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative h-[800vh] bg-dark">
-      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center">
-        {/* Logo */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 z-20">
+    <>
+      {/* Loading Overlay */}
+      <div
+        className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-dark text-white transition-all duration-700 ease-in-out ${
+          loadingProgress === 100
+            ? "opacity-0 pointer-events-none"
+            : "opacity-100"
+        }`}
+      >
+        <div className="flex flex-col items-center max-w-sm w-full px-6">
           <img
             src="/assets/images/logo.png"
             alt="Cheetah Logo"
-            className="h-16 w-auto"
+            className="h-16 w-auto mb-8 animate-pulse"
+          />
+          <div className="w-full bg-zinc-800 h-1 rounded-full overflow-hidden mb-4">
+            <div
+              className="bg-primary h-full transition-all duration-300 ease-out"
+              style={{ width: `${loadingProgress}%` }}
+            />
+          </div>
+          <div className="flex justify-between w-full text-sm font-light text-zinc-400">
+            <span>Loading Experience...</span>
+            <span className="font-mono">{loadingProgress}%</span>
+          </div>
+        </div>
+      </div>
+
+      <div ref={containerRef} className="relative h-[800vh] bg-dark">
+        <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center">
+          {/* Logo */}
+          <div className="absolute top-10 left-1/2 -translate-x-1/2 z-20">
+            <img
+              src="/assets/images/logo.png"
+              alt="Cheetah Logo"
+              className="h-16 w-auto"
+            />
+          </div>
+
+          {/* Foreground Canvas */}
+          <canvas
+            ref={fgCanvasRef}
+            className="absolute top-0 left-0 w-full h-full object-cover block z-10 pointer-events-none"
           />
         </div>
-
-        {/* Foreground Canvas */}
-        <canvas
-          ref={fgCanvasRef}
-          className="absolute top-0 left-0 w-full h-full object-cover block z-10 pointer-events-none"
-        />
       </div>
-    </div>
+    </>
   );
 };
