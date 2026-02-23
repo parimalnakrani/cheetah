@@ -138,7 +138,7 @@ export const CheetahExperience: React.FC = () => {
           />
           <div className="w-full bg-zinc-800 h-1 rounded-full overflow-hidden mb-4">
             <div
-              className="bg-primary h-full transition-all duration-300 ease-out"
+              className="bg-white h-full transition-all duration-300 ease-out"
               style={{ width: `${loadingProgress}%` }}
             />
           </div>
