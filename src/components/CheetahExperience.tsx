@@ -71,7 +71,7 @@ export const CheetahExperience: React.FC = () => {
     for (let i = 1; i <= TOTAL_FRAMES; i++) {
       const img = new Image();
       const paddedIndex = i.toString().padStart(3, "0");
-      img.src = `/assets/ezgif-frame-${paddedIndex}.png`;
+      img.src = `/assets/ezgif-frame-${paddedIndex}.webp`;
       images.push(img);
 
       img.onload = () => {
@@ -132,7 +132,7 @@ export const CheetahExperience: React.FC = () => {
       >
         <div className="flex flex-col items-center max-w-sm w-full px-6">
           <img
-            src="/assets/images/logo.png"
+            src="/assets/images/logo.webp"
             alt="Cheetah Logo"
             className="h-16 w-auto mb-8 animate-pulse"
           />
@@ -154,7 +154,7 @@ export const CheetahExperience: React.FC = () => {
           {/* Logo */}
           <div className="absolute top-10 left-1/2 -translate-x-1/2 z-20">
             <img
-              src="/assets/images/logo.png"
+              src="/assets/images/logo.webp"
               alt="Cheetah Logo"
               className="h-16 w-auto"
             />

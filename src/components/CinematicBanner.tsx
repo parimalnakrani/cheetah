@@ -30,14 +30,14 @@ export const CinematicBanner: React.FC = () => {
 
       // Text reveal effect
       gsap.from(textRef.current, {
-        scale: 0.8,
+        scale: 0.9,
         opacity: 0,
-        y: 100,
-        duration: 1.2,
-        ease: "power3.out",
+        y: 40,
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: container.current,
-          start: "top 80%",
+          start: "top 95%",
           once: true,
         },
       });
@@ -53,7 +53,7 @@ export const CinematicBanner: React.FC = () => {
       <div className="relative w-full h-[85vh] overflow-hidden rounded-3xl bg-carbon flex items-end justify-center">
         <img
           ref={imageRef}
-          src="/assets/images/cheetah.jpg"
+          src="/assets/images/cheetah.webp"
           alt="Cheetah Savanna"
           className="absolute inset-x-0 w-full h-[150%] object-cover opacity-80"
           style={{ top: "-25%" }}

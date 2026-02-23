@@ -12,28 +12,28 @@ const CARDS = [
     title: "EXPLOSIVE ACCELERATION",
     category: "Speed",
     tagline: "0 to 60 in a heartbeat.",
-    img: "/assets/images/cheetah_speed_1771813561428.png",
+    img: "/assets/images/cheetah_speed_1771813561428.webp",
   },
   {
     id: 2,
     title: "UNMATCHED AGILITY",
     category: "Agility",
     tagline: "Turn on a dime.",
-    img: "/assets/images/cheetah_agility_1771813579028.png",
+    img: "/assets/images/cheetah_agility_1771813579028.webp",
   },
   {
     id: 3,
     title: "RAW POWER",
     category: "Power",
     tagline: "Built for the relentless.",
-    img: "/assets/images/cheetah_power_1771813596605.png",
+    img: "/assets/images/cheetah_power_1771813596605.webp",
   },
   {
     id: 4,
     title: "PREDATORY INSTINCT",
     category: "Control",
     tagline: "Dominate your environment.",
-    img: "/assets/images/cheetah_control_1771813616983.png",
+    img: "/assets/images/cheetah_control_1771813616983.webp",
   },
 ];
 
@@ -46,27 +46,27 @@ export const BuiltForSpeedCarousel: React.FC = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
-          start: "top 75%",
+          start: "top 95%",
           once: true,
         },
       });
 
       tl.from(".header-anim", {
-        y: 50,
+        y: 30,
         opacity: 0,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power3.out",
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
       }).from(
         ".card-anim",
         {
-          x: 100,
+          x: 50,
           opacity: 0,
-          stagger: 0.15,
-          duration: 1,
-          ease: "power3.out",
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "power2.out",
         },
-        "-=0.6",
+        "-=0.5",
       );
     },
     { scope: container },

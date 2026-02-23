@@ -13,27 +13,27 @@ export const FirstLook: React.FC = () => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
-          start: "top 80%",
+          start: "top 95%",
           once: true,
         },
       });
 
       tl.from(".reveal-text", {
-        y: 100,
+        y: 50,
         opacity: 0,
         stagger: 0.1,
-        duration: 1,
-        ease: "power4.out",
+        duration: 0.8,
+        ease: "power2.out",
       }).from(
         ".fade-up",
         {
-          y: 30,
+          y: 20,
           opacity: 0,
-          stagger: 0.2,
-          duration: 1,
-          ease: "power3.out",
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power2.out",
         },
-        "-=0.5",
+        "-=0.4",
       );
     },
     { scope: container },
